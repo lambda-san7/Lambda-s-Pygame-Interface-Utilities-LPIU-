@@ -1,4 +1,4 @@
-import pygame #you should add "Lambda's Pygame Interface Utilities (LPIU)" library to this list
+import pygame 
 import utils
 from utils import (
     dir_path,
