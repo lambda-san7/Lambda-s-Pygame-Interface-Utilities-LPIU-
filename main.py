@@ -50,7 +50,10 @@ class game:
             msg = utils.text(32,"...and it's a bit of a mess right now.",thicc=2) 
             msg.render(center.x(msg.w),((3 * 100) + (msg.h * 2)))
         hover_button.render(center.x(hover_button.txt.w), 2 * 100)
-
+        #typing = utils.input(50,32)
+        #typing.render(0,0)
+        #typing.click(0,0)
+        #typing.typing()
 
 
 ########################

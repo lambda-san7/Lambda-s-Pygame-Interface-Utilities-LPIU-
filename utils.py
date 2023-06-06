@@ -88,3 +88,45 @@ class text:
         window.blit(self.text,(x + self.border_thickness,y))
         self.text = self.font.render(self.text_holder, True, self.color)
         window.blit(self.text,(x,y))
+
+class input:
+    def __init__(self,w,h):
+        self.w = w
+        self.h = h
+        self.active = False
+        self.content = ""
+    def render(self,x,y):
+        pygame.draw.rect(window,(0,0,0),(x,y,self.w,self.h))
+        msg = text(32,self.content,thicc=2)
+        msg.render(x,y)
+    def click(self,x,y):
+        if (pygame.mouse.get_pos()[0] < x + self.w and
+            pygame.mouse.get_pos()[0] > x and
+            pygame.mouse.get_pos()[1] < y + self.h and
+            pygame.mouse.get_pos()[1] > y):
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    self.active = True
+                    print("active")
+                    return True
+        else:
+            self.active = False
+            return False
+        
+    def typing(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    letter = chr(event.key)
+                    self.content += letter
+                if event.key >= pygame.K_a and event.key <= pygame.K_z:
+                    letter = chr(event.key)
+                    if pygame.key.get_mods() & pygame.KMOD_SHIFT:  # Check if SHIFT key is pressed
+                        letter = letter.upper()
+                    else:
+                        letter = letter.lower()
+                    self.content += letter
+                if event.key == pygame.K_BACKSPACE:
+                    letter = chr(event.key)
+                    modified_title = self.content[:-1]
+                    self.content = modified_title
